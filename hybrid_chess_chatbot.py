@@ -23,13 +23,12 @@ if "chat_history" not in st.session_state:
 board = st.session_state.board
 
 # --- Render Board ---
+
+
 def render_board(board):
-    svg_data = chess.svg.board(board=board)
-    drawing = svg2rlg(io.StringIO(svg_data))
-    png_data = io.BytesIO()
-    renderPM.drawToFile(drawing, png_data, fmt="PNG")
-    png_data.seek(0)
-    st.image(png_data, width=400, caption="Current Board")
+    svg_board = chess.svg.board(board=board)
+    st.markdown(f'<div style="text-align:center">{svg_board}</div>', unsafe_allow_html=True)
+
 
 # --- Chatbot Logic ---
 def chatbot_response(user_input):
@@ -85,4 +84,5 @@ st.text_input(
 st.subheader("💬 Chat History")
 for sender, message in st.session_state.chat_history:
     st.markdown(f"**{sender}:** {message}")
+
 
