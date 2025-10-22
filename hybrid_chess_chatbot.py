@@ -2,10 +2,13 @@ import streamlit as st
 import chess
 import chess.svg
 import random
-from svglib.svglib import svg2rlg
-from reportlab.graphics import renderPM
-import io
 
+import io
+board = chess.Board()
+
+# Display SVG directly
+svg_board = chess.svg.board(board=board)
+st.markdown(f'<div style="text-align:center">{svg_board}</div>', unsafe_allow_html=True)
 st.set_page_config(page_title="Hybrid Chess Chatbot", page_icon="♟️", layout="centered")
 
 st.title("♟️ Hybrid Chess Chatbot")
@@ -82,3 +85,4 @@ st.text_input(
 st.subheader("💬 Chat History")
 for sender, message in st.session_state.chat_history:
     st.markdown(f"**{sender}:** {message}")
+
